@@ -1,5 +1,8 @@
 #include QMK_KEYBOARD_H
 
+enum {
+	TD_ESC_CAPS = 0
+};
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT(
 		KC_KP_DOT, KC_KP_SLASH, KC_KP_ASTERISK, KC_BSPACE,

@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x0000
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Bin
-#define PRODUCT         BigoPad
+#define PRODUCT         BggPad
 #define DESCRIPTION     A Encoder Keyboard
 
 /* key matrix size */
@@ -77,6 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
+#define TAPPING_TERM 200
 
 #define OLED_FONT_H "./lib/glcdfont.c"
 
