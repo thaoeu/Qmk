@@ -1,14 +1,18 @@
 #include QMK_KEYBOARD_H
 
 enum {
-	TD_ESC_CAPS = 0
+	ZERO_1 = 0,
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [ZERO_1] = ACTION_TAP_DANCE_DOUBLE(KC_1, KC_0)
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT(
 		KC_KP_DOT, KC_KP_SLASH, KC_KP_ASTERISK, KC_BSPACE,
 		KC_7, KC_8, KC_9, KC_KP_PLUS,
 		KC_4, KC_5, KC_6, KC_KP_MINUS,
-		KC_1, KC_2, KC_3, LT(1, KC_ENTER)),
+		TD(ZERO_1), KC_2, KC_3, LT(1, KC_ENTER)),
 [1] = LAYOUT(
 		M(0), M(1), M(2), M(3),
 		M(2), KC_8, KC_9, KC_UP,
