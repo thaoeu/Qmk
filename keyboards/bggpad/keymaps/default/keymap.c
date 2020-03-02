@@ -1,25 +1,36 @@
 #include QMK_KEYBOARD_H
+#define TAPPING_TOGGLE 2
 
 enum {
-	ZERO_1 = 0,
+	ENT_1 = 0,
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [ZERO_1] = ACTION_TAP_DANCE_DOUBLE(KC_1, KC_0)
+  [ENT_1] = ACTION_TAP_DANCE_DOUBLE(KC_ENTER, KC_LGUI)
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT(
-		KC_KP_DOT, KC_KP_SLASH, KC_KP_ASTERISK, KC_BSPACE,
-		KC_7, KC_8, KC_9, KC_KP_PLUS,
-		KC_4, KC_5, KC_6, KC_KP_MINUS,
-		TD(ZERO_1), KC_2, KC_3, LT(1, KC_ENTER)),
+//		KC_KP_DOT, KC_KP_SLASH, KC_KP_ASTERISK, KC_BSPACE,
+		KC_7, KC_8, KC_9, KC_BSPACE,
+		KC_4, KC_5, KC_6, KC_PGUP,
+		KC_1, KC_2, KC_3, KC_PGDOWN,
+		KC_LEFT, KC_0, LT(1, KC_E), TD(ENT_1)),
 [1] = LAYOUT(
-		M(0), M(1), M(2), M(3),
+		M(0), M(1), M(6), M(3),
 		M(2), KC_8, KC_9, KC_UP,
 		M(4), KC_5, KC_6, KC_DOWN,
-		M(5), KC_2, KC_3, KC_0),
+		M(5), KC_2, KC_TRNS, KC_0),
+[2] = LAYOUT(
+		M(0), M(1), M(2), M(3),
+		KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT,
+		M(4), KC_5, KC_6, KC_DOWN,
+		KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT),
+[3] = LAYOUT(
+		G(KC_7), G(KC_8), G(KC_9), G(S(KC_COMMA)),
+		G(KC_4), G(KC_5), G(KC_6), LT(KC_LGUI, KC_PGUP),
+		G(KC_1), G(KC_2), G(KC_3), KC_INSERT,
+		KC_PAUSE, KC_LGUI, G(KC_3), LT(1, KC_ENTER)),
 };
-
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
@@ -53,6 +64,14 @@ switch (id) {
     if (record->event.pressed) {
     return MACRO( T(1), T(7), T(5), T(4), T(5), T(1), T(2), T(7), T(6), T(1), T(4), END );
     }
+    case 6:
+    if (record->event.pressed) {
+	return MACRO( T(1), T(9), T(2), T(E), T(1), T(6), T(8), T(E), END );
+	}
+    case 7:
+    if (record->event.pressed) {
+    return MACRO( T(X), T(C), T(V), T(ENTER), END );
+    }
     break;
 }
     return MACRO_NONE;
@@ -76,15 +95,15 @@ void oled_task_user(void) { render_logo(); }
 void encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) {
     if (clockwise) {
-      tap_code(KC_F8);
+      tap_code(KC_PAUSE);
     } else {
-      tap_code(KC_F9);
+      tap_code(KC_INSERT);
     }
   } else if (index == 1) {
     if (clockwise) {
-      tap_code(KC_A);
+      tap_code(KC_C);
     } else {
-      tap_code(KC_D);
+      tap_code(KC_V);
     }
   }
 }
